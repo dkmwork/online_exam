@@ -1,0 +1,15 @@
+{% extends "onlineexamapp/base.html" %}
+{% block body_block %}
+<form method="POST">
+    {% csrf_token %}
+    <center>
+        <div>
+            <div><h5>Create Level Table</h5></div>
+            <table>
+                {{LevelFlag.as_table}}
+            </table>
+            <input type="submit" class="btn btn-info" value="Save"/>
+        </div>
+    </center>
+</form>
+{% endblock %}

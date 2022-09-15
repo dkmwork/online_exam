@@ -1,0 +1,36 @@
+{% extends "onlineexamapp/base.html" %}
+{% block body_block %}
+<form method="POST">
+    {% csrf_token %}
+    <center>
+        <div>
+            <div><h5> Exam</h5></div>
+            <table>
+                <tr>
+                    <td>
+                        <textarea type="text" cols="50" rows="2" name = "question" > {{Question}}</textarea>
+                        
+                    </td>
+                    <td>
+                    <!-- <h5>Total Mark</h5>
+                    <input type="text" value="{{mark}}"/> -->
+                    </td>
+                        
+                </tr>
+                {% for option in Options %}
+               <tr>   
+                <td>
+                <input type="radio" name="opt" value="{{option}}"/>
+                <label>{{option}}</label>
+            </td>
+               </tr>
+               {% endfor %}
+                
+            </table>
+            
+        </div>
+        <input type="submit" class="btn btn-info" value="Submit"/>
+    </center> 
+
+</form>
+{% endblock %}

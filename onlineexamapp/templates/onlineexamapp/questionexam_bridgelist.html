@@ -1,0 +1,49 @@
+{% extends "onlineexamapp/base.html" %}
+{% block body_block %}
+<form method="GET">
+    {% csrf_token %}
+    <div class="table-responsive">
+        <label class="control-label">Exam Name</label>
+        <input type="text" id="examinfo" name="exam"/>
+        <label class="control-label">Question</label>
+        <input type="text" id="questioninfo" name="question"/>
+        <input type="submit" id="examget" value="Search"/>
+        <table class="table table-striped table-bordered table-sm" id="examquestionlist">
+            <thead>
+                <tr>
+                    <th>Exam</th>
+                    <th>Question</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in page_obj %}
+                <tr>
+                    <td>{{item.exam}}</td>
+                    <td>{{item.question}}</td>
+                    <td>
+                        <a href="{% url 'questionexam_bridgeedit' qebridgeid=item.qebridge_id %}">Edit</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+            <a href="?{% if exam%}exam={{exam}}&{%endif%}{% if question%}question={{question}}&{%endif%}page=1">first</a>
+            <a href="?{% if exam%}exam={{exam}}&{%endif%}{% if question%}question={{question}}&{%endif%}page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+            <span class="current">
+                Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}
+            </span>
+            {% if page_obj.has_next %}
+            <a href="?{% if exam%}exam={{exam}}&{%endif%}{% if question%}question={{question}}&{%endif%}page={{page_obj.next_page_number}}">next</a>
+            <a href="?{% if exam%}exam={{exam}}&{%endif%}{% if question%}question={{question}}&{%endif%}page={{page_obj.paginator.num_pages}}">last</a>
+            {% endif %}
+        </span>
+    </div>
+    </div>
+
+</form>
+{% endblock %}

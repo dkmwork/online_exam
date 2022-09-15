@@ -1,0 +1,12 @@
+{% extends "onlineexamapp/base.html" %}
+{% block body_block %}
+<form method="POST">
+    {%csrf_token%}
+    <center>
+        <table>
+            {{examsubjectinstance.as_table}}
+        </table>
+        <input type="submit" value="Save" class="btn btn-info"/>
+    </center>
+</form>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "onlineexamapp/base.html" %}
+{% block body_block %}
+<form method="POST">
+    {% csrf_token %}
+    <center>
+        <div>
+            <div><h5>Create Question</h5></div>
+            <table>
+                {{Question.as_table}}
+            </table>
+        </div>
+        <input type="submit" class="btn btn-info" value="Save"/>
+    </center>
+</form>
+{% endblock %}

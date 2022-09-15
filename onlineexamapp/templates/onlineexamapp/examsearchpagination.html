@@ -1,0 +1,10 @@
+{% extends ""onlineexamapp/base.html"" %}
+{% block body_block %}
+<form method="POST">
+    {% csrf_token %}
+    <table id="examinfo">
+        <input type="text" id="txt_examname"/>
+    </table>
+
+</form>
+{% endblock %}

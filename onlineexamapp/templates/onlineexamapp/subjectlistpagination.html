@@ -1,0 +1,51 @@
+{% extends "onlineexamapp/base.html" %}
+{% block body_block %}
+<form method="GET">
+    {% csrf_token %}
+    <div class="table-responsive">
+        <label class="control-label">Subject</label>
+        <input type="text" id="subject_info" name="subject"/>
+        <label class="control-label">Category</label>
+        <input type="text" id="category_info" name="category"/>
+        <input type="submit" id="subjectget" value="Search"/>
+        <table class="table table-striped table-bordered table-sm" id="subjectlist">
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Code</th>
+                    <th>Category</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in page_obj %}
+                <tr>
+                    <td>{{item.subject_name}}</td>
+                    <td>{{item.subject_code}}</td>
+                    <td>{{item.subject_category}}</td>
+                    <td>
+                        <a href="{% url 'subjectedit' subjectid=item.subject_id %}">Edit</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                <a href="?{% if subject%}subject={{subject}}&{%endif%}{% if category%}category={{category}}&{%endif%}page=1">first</a>
+                <a href="?{% if subject%}subject={{subject}}&{%endif%}{% if category%}category={{category}}&{%endif%}page={{ page_obj.previous_page_number}}">previous</a>
+                {% endif %}
+                <span class="current">
+                    Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}
+                </span>
+                {% if page_obj.has_next %}
+                <a href="?{% if subject%}subject={{subject}}&{%endif%}{% if category%}category={{category}}&{%endif%}page={{page_obj.next_page_number}}">next</a>
+                <a href="?{% if subject%}subject={{subject}}&{%endif%}{% if category%}category={{category}}&{%endif%}page={{page_obj.paginator.num_pages}}">last</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+
+</form>
+{% endblock %}

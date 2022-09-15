@@ -1,0 +1,51 @@
+{% extends "onlineexamapp/base.html" %}
+{% block body_block %}
+<form method="POST">
+
+    {% csrf_token %}
+    <center>
+        <div><h6>Student Name :
+       {{Result_Details.0.0}}</h6></div>
+       <div><h6>Exam :
+       {{Result_Details.0.1}}</h6></div>
+        <div>
+            <div><h5>Total Mark :
+                {{mark}}/{{total}}</h5>
+            </div> 
+            
+        </div>
+        
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    
+                    <th>Question</th>
+                    <th>Student Answer</th>
+                    <th>Correct Answer</th>
+                    
+                    <th>Marks</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in Result_Details %}
+                <tr>
+                    <td>{{item.2}}</td>
+                    <td>{{item.3}}</td>
+                    <td>{{item.4}}</td>
+                    {% if item.5 %}
+                    <td>{{item.6}}</td>
+                    
+                    {% else %}
+                    <td>-{{item.6}}</td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </center>
+
+</form>
+{% endblock %}
+
+
